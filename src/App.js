@@ -1,41 +1,31 @@
 import "./style.min.css";
 
-import db from "./db/db";
+import { Route, Link } from "react-router-dom";
+
+import HomePage from "./components/routes/HomePage";
+import ProductPage from "./components/routes/ProductPage";
 
 function App() {
   return (
-    <div class="grid-container">
-      <header class="header">
-        <div>
+    <div className="grid-container">
+      <header className="header">
+        <Link to="/">
           <h1>Amazon-Clone</h1>
-        </div>
-        <div class="header-links">
-          <a class="header-link" href="cart.html">
-            Cart
-          </a>
-          <a class="header-link" href="signin.html">
-            Sign-In
-          </a>
+        </Link>
+        <div className="header-links">
+          <Link to="/cart">
+            <div className="header-link">Cart</div>
+          </Link>
+          <Link to="/signin">
+            <div className="header-link">Sign-In</div>
+          </Link>
         </div>
       </header>
-      <main class="main">
-        <div class="product-cards">
-          {db.map((item) => (
-            <div class="product-card" key={item.productId}>
-              <img class="medium" src={item.productImage} alt="product" />
-              <div class="product-card-body">
-                <h2 class="product-card-name">{item.productName}</h2>
-                <div class="product-card-rating">{item.productRating}</div>
-                <div class="product-card-description">
-                  {item.productDescription}
-                </div>
-              </div>
-              <div class="product-card-price">£{item.productPrice}</div>
-            </div>
-          ))}
-        </div>
+      <main className="main">
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/product" component={ProductPage} />
       </main>
-      <footer class="footer">
+      <footer className="footer">
         <p>All rights reserved</p>
       </footer>
     </div>
